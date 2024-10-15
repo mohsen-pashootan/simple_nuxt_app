@@ -9,33 +9,61 @@ import PostList from "@/components/Posts/PostList";
 
 export default {
   components: {
-    PostList
+    PostList,
   },
-  asyncData(context, callback) {
-    setTimeout(() => {
-      callback(null, {
-        loadedPosts: [
-          {
-            id: "1",
-            title: "First Post",
-            previewText: "This is our first post!",
-            thumbnail:
-              "https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg"
-          },
-          {
-            id: "2",
-            title: "Second Post",
-            previewText: "This is our second post!",
-            thumbnail:
-              "https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg"
-          }
-        ]
+  asyncData(context) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          loadedPosts: [
+            {
+              id: "1",
+              title: "First Post",
+              previewText: "This is our first post!",
+              thumbnail:
+                "https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg",
+            },
+            {
+              id: "2",
+              title: "Second Post",
+              previewText: "This is our second post!",
+              thumbnail:
+                "https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg",
+            },
+          ],
+        });
+      }, 1000);
+      // reject(new Error())
+    })
+      .then((data) => {
+        return data;
+      })
+      .catch((e) => {
+        context.error(e);
       });
-    }, 1000);
-  }
+    // calcback
+    // callback(null, {
+    //     loadedPosts: [
+    //       {
+    //         id: "1",
+    //         title: "First Post",
+    //         previewText: "This is our first post!",
+    //         thumbnail:
+    //           "https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg"
+    //       },
+    //       {
+    //         id: "2",
+    //         title: "Second Post",
+    //         previewText: "This is our second post!",
+    //         thumbnail:
+    //           "https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg"
+    //       }
+    //     ]
+    //   });
+    // }, 1000);
+  },
 };
 </script>
-
 
 <style scoped>
 .posts-page {
